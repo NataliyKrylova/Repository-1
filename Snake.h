@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-int N = 55, M = 25;
+int N = 58, M = 25;
 int size = 20;
 int w = size*N;
 int h = size*M;
