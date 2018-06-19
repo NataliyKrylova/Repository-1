@@ -69,14 +69,36 @@ usieep (1000000/speed);
 usleep(1000000/speed);
 }
 
+void letThereBeApple(int* appleX, int* appleY, int* appleEaten) {
 
+if (*appleEaten) {
+srand(time(0));
+*appleX = (rand() % MAXWIDTH)+1;
+*appleY = (rand() % MAXHEIGHT)+1;
+appleEaten = 0;
+}
 
+mvprint(*appleY, *appleY, "A");
+}
 
+void  eatApple(int *snakeArray, int appleX, int appleY, int *appleEaten, int *snakeLength) {
 
+int x = *snakeArray;
+int y = *(snakeArray+1);
 
+if (x == appleX && y == appleY) {
+*appleEaten = 1;
+*snakeLength += 1;
 
+int snakeLen = *snakeLength;
+int lastX = *(snakeArray + snakeLen*2-2);
+int lastY = *(snakeArray + snakeLen*2-2+1);
+*(snakeArray + snakeLen*2) = lastX;
+*(snakeArray + snakeLen*2+1) = lastY;
+}
 
-
+mvprint(0,0, "Snake_Length: %d", *snakeLength);
+}
 
 
 
