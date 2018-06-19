@@ -100,38 +100,63 @@ int lastY = *(snakeArray + snakeLen*2-2+1);
 mvprint(0,0, "Snake_Length: %d", *snakeLength);
 }
 
+int main() {
+int snakeArray[100] [2];
+snakeArray[0] [0] = 3;
+snakeArray[0] [1] = 3;
+int keyPassed = 0;
+int dirX = 1;
+int dirY = 0;
+int speed = 20;
+int appleX = 0;
+int appleY = 0;
+int appleEaten = 1;
+int appleLength = 3;
+
+initscr();
+curs_set(false);
+noecho();
+
+while (!colliding(&snakeArray[0][0])) {
+erase();
+
+letThereBeApple(&appleX, &appleY, &appleEaten);
+moveSnake(&snakeArray[0][0], dirX, dirY, speed, snakeLength);
+eatApple(&snakeArray[0][0], appleX, appleY, appleEaten, snakeLength);
+refresh();
 
 
+if (kbhit()) {
 
+keyPressed = getch();
 
+if (keyPressed == 'w') { 
+dirY = -1;
+dirX = 0;
+}
 
+if (keyPressed == 's') { 
+dirY = 1;
+dirX = 0;
+}
 
+if (keyPressed == 'a') { 
+dirY = -1;
+dirX = 0;
+}
 
+if (keyPressed == 'd') { 
+dirY = 1;
+dirX = 0;
+}
+}
+}
 
+erase();
+mvprintw(MAXHEIGHT/2, MAXWIDTH/4, "Game Over! - Your score was: %d", snakeLength);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+refresh();
+getch();
+endwin();
+return 0;
+}
