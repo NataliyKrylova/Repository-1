@@ -1,12 +1,27 @@
-#include <SFM/Graphics.hpp>
+#include <ncurses.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <stdlib>
 #include <time.h>
 
-using namespace sf;
+#define MAXWIDTH 80
+#define MAXHEIGHT 25
 
-int N = 58, M = 25;
-int size = 20;
-int w = size*N;
-int h = size*M;
-int dir, num = 4;
+int kbhit (void) {
+//Check key
+struct timeval tv;
+fd_set read_fd;
+
+tv.tv_sec=0;
+tv.tv_usec=0;
+FD_ZERO(&read_fd);
+FD_SET(0,&read_fd);
+
+if(select(1, &read_fd, NULL, NULL, &tv) == -1)
+return 0;
+
+return 0;
+}
+
 
 
